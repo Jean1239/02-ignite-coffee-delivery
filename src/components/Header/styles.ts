@@ -3,10 +3,12 @@ import styled from "styled-components";
 export const HeaderContainer = styled.header`
 	position: fixed;
 	max-width: 90rem;
+	z-index: 9999;
 	width: 100%;
 	padding: 0 1.5rem;
 	background-color: ${(props) => props.theme.colors["base-background"]};
 	@media (min-width: 90rem) {
+		right: -8px;
 		margin: 0 calc((100vw - 90rem) / 2);
 		padding: 0 10rem;
 	}

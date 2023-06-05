@@ -27,22 +27,22 @@ export const defaultTheme = {
 			},
 			l: {
 				size: "2rem",
-				weight: "ExtraBold",
+				weight: "800",
 				lineHeight: "1.3",
 			},
 			m: {
 				size: "1.5rem",
-				weight: "ExtraBold",
+				weight: "800",
 				lineHeight: "1.3",
 			},
 			s: {
 				size: "1.25rem",
-				weight: "Bold",
+				weight: "700",
 				lineHeight: "1.3",
 			},
 			xs: {
 				size: "1.125rem",
-				weight: "Bold",
+				weight: "700",
 				lineHeight: "1.3",
 			},
 		},
@@ -63,21 +63,21 @@ export const defaultTheme = {
 			},
 			xs: {
 				size: "1.125rem",
-				weight: "Bold",
+				weight: "700",
 				lineHeight: "1.3",
 			},
 		},
 		tag: {
 			family: "Roboto",
 			size: "0.625rem",
-			weight: "Bold",
+			weight: "700",
 			lineHeight: "1.3",
 		},
 		button: {
 			g: {
 				family: "Roboto",
 				size: "0.875rem",
-				weight: "Bold",
+				weight: "700",
 				lineHeight: "160%",
 			},
 			m: {
