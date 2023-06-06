@@ -27,15 +27,13 @@ export const LocationAndCartContainer = styled.div`
 	gap: 0.75rem;
 `;
 
-const BaseSpanContainer = styled.div`
+export const LocationContainer = styled.div`
 	display: flex;
 	align-items: center;
 	padding: 0.5rem;
 	gap: 0.25rem;
 	border-radius: 8px;
-`;
 
-export const LocationSpanContainer = styled(BaseSpanContainer)`
 	background-color: ${(props) => props.theme.colors["brand-purple-light"]};
 	color: ${(props) => props.theme.colors["brand-purple-dark"]};
 	font-size: ${(props) => props.theme.fonts.text.s.size};
@@ -45,10 +43,41 @@ export const LocationSpanContainer = styled(BaseSpanContainer)`
 	}
 `;
 
-export const CartSpanContainer = styled(BaseSpanContainer)`
+export const ShoppingCartContainer = styled.a`
+	display: flex;
+	align-items: center;
+	padding: 0.5rem;
+	gap: 0.25rem;
+	border-radius: 8px;
+
+	cursor: pointer;
+
+	position: relative;
 	background-color: ${(props) => props.theme.colors["brand-yellow-light"]};
 
 	svg {
 		color: ${(props) => props.theme.colors["brand-yellow-dark"]};
 	}
+
+	&:hover {
+		background-color: ${(props) => props.theme.colors["brand-yellow"]};
+	}
+`;
+
+export const AmountContainer = styled.strong`
+	display: flex;
+	position: absolute;
+	top: -8px;
+	left: 26.35px;
+	border-radius: 50%;
+	width: 20px;
+	height: 20px;
+
+	line-height: 0;
+	justify-content: center;
+	align-items: center;
+	font-size: ${(props) => props.theme.fonts.text.s.size};
+	color: ${(props) => props.theme.colors["base-white"]};
+
+	background-color: ${(props) => props.theme.colors["brand-yellow-dark"]};
 `;

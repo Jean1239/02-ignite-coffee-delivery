@@ -54,7 +54,7 @@ export function CoffeeList() {
 			</CoffeeListHeader>
 			<CoffeeListGrid>
 				{coffeeList.map((coffee) => (
-					<CoffeeCard coffee={coffee} />
+					<CoffeeCard key={coffee.name} coffee={coffee} />
 				))}
 			</CoffeeListGrid>
 		</>

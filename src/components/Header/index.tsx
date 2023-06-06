@@ -3,24 +3,36 @@ import logo from "../../assets/logo.svg";
 import {
 	LocationAndCartContainer,
 	NavContainer,
-	LocationSpanContainer,
-	CartSpanContainer,
+	LocationContainer,
+	ShoppingCartContainer,
 	HeaderContainer,
+	AmountContainer,
 } from "./styles";
+import { useContext } from "react";
+import { BuyContext } from "../../contexts/BuyContext";
 
 export function Header() {
+	const { shoppingCart } = useContext(BuyContext);
+	const amount = shoppingCart.reduce(
+		(acc, item) => (acc += item.quantity),
+		0
+	);
+
 	return (
 		<HeaderContainer>
 			<NavContainer>
 				<img src={logo} alt="" />
 				<LocationAndCartContainer>
-					<LocationSpanContainer>
+					<LocationContainer>
 						<MapPin size={22} weight="fill" color="#8047F8" /> Porto
 						Alegre, RS
-					</LocationSpanContainer>
-					<CartSpanContainer>
+					</LocationContainer>
+					<ShoppingCartContainer>
+						{amount != 0 && (
+							<AmountContainer>{amount}</AmountContainer>
+						)}
 						<ShoppingCart size={22} weight="fill" />
-					</CartSpanContainer>
+					</ShoppingCartContainer>
 				</LocationAndCartContainer>
 			</NavContainer>
 		</HeaderContainer>

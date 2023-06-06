@@ -48,4 +48,66 @@ export const CoffeeDescription = styled.span`
 	text-align: center;
 `;
 
-export const CoffeeCardFooter = styled.footer``;
+export const CoffeeCardFooter = styled.footer`
+	display: flex;
+	width: 100%;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0 1.5rem 1.25rem;
+`;
+
+export const PriceContainer = styled.span`
+	text-align: right;
+	color: ${(props) => props.theme.colors["base-text"]};
+	font-size: ${(props) => props.theme.fonts.text.s.size};
+	font-weight: ${(props) => props.theme.fonts.text.s.weight};
+
+	strong {
+		font-family: ${(props) => props.theme.fonts.title.family};
+		font-size: ${(props) => props.theme.fonts.title.m.size};
+		font-weight: ${(props) => props.theme.fonts.title.m.weight};
+	}
+`;
+
+export const QuantityAndCartButtonContainer = styled.div`
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+`;
+
+export const QuantityContainer = styled.div`
+	display: flex;
+	align-items: center;
+	font-size: ${(props) => props.theme.fonts.text.m.size};
+	gap: 0.25rem;
+	background-color: ${(props) => props.theme.colors["base-button"]};
+	border-radius: 6px;
+	padding: 0.5rem;
+
+	button {
+		border: 0;
+		background: transparent;
+		cursor: pointer;
+
+		color: ${(props) => props.theme.colors["brand-purple"]};
+
+		&:hover {
+			color: ${(props) => props.theme.colors["brand-purple-dark"]};
+		}
+	}
+`;
+
+export const AddToCartButton = styled.button`
+	padding: 0.5rem;
+	background-color: ${(props) => props.theme.colors["brand-purple-dark"]};
+	color: ${(props) => props.theme.colors["base-card"]};
+	border: 0;
+	border-radius: 6px;
+	line-height: 0;
+	align-items: center;
+	cursor: pointer;
+
+	&:hover {
+		background-color: ${(props) => props.theme.colors["brand-purple"]};
+	}
+`;
