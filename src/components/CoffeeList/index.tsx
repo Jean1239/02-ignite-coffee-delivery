@@ -1,9 +1,12 @@
+/* eslint-disable no-mixed-spaces-and-tabs */
 import { CoffeeCard, CoffeeType } from "../CoffeeCard";
 import { CoffeeListHeader, CoffeeListGrid, CoffeeListFilter } from "./styles";
 import expresso from "../../assets/coffees/tradicionalExpresso.svg";
 import capuccino from "../../assets/coffees/capuccino.svg";
 import mocaccino from "../../assets/coffees/mocaccino.svg";
 import cubano from "../../assets/coffees/cubano.svg";
+import { useState, MouseEvent } from "react";
+import { produce } from "immer";
 
 const coffeeList: CoffeeType[] = [
 	{
@@ -39,23 +42,65 @@ const coffeeList: CoffeeType[] = [
 	},
 ];
 
+const tags = ["tradicional", "especial", "com leite", "alcoólico", "gelado"];
+
 export function CoffeeList() {
+	const [filterTags, setFilterTags] = useState([] as string[]);
+
+	let filteredCoffeeList = null;
+	if (filterTags.length > 0) {
+		filteredCoffeeList = coffeeList.filter((coffe) => {
+			const hasAllTags = filterTags.every((tag) =>
+				coffe.tags.includes(tag)
+			);
+			if (hasAllTags) {
+				return true;
+			}
+			return false;
+		});
+	}
+
+	function HandleOnClickTag(event: MouseEvent) {
+		const tag = event.currentTarget.innerHTML as string;
+		setFilterTags(
+			produce(filterTags, (draft) => {
+				const hasTag = draft.includes(tag);
+				if (hasTag) {
+					draft = draft.filter((value) => value != tag);
+				} else {
+					draft.push(tag);
+				}
+				return draft;
+			})
+		);
+	}
+
 	return (
 		<>
 			<CoffeeListHeader>
 				<h2>Nossos cafés</h2>
 				<CoffeeListFilter>
-					<span>TRADICIONAL</span>
-					<span>ESPECIAL</span>
-					<span>COM LEITE</span>
-					<span>ALCOÓLICO</span>
-					<span>GELADO</span>
+					{tags.map((tag) => (
+						<button
+							className={
+								filterTags.includes(tag) ? "selectedTag" : ""
+							}
+							onClick={HandleOnClickTag}
+							key={tag}
+						>
+							{tag}
+						</button>
+					))}
 				</CoffeeListFilter>
 			</CoffeeListHeader>
 			<CoffeeListGrid>
-				{coffeeList.map((coffee) => (
-					<CoffeeCard key={coffee.name} coffee={coffee} />
-				))}
+				{filteredCoffeeList
+					? filteredCoffeeList.map((coffee) => (
+							<CoffeeCard key={coffee.name} coffee={coffee} />
+					  ))
+					: coffeeList.map((coffee) => (
+							<CoffeeCard key={coffee.name} coffee={coffee} />
+					  ))}
 			</CoffeeListGrid>
 		</>
 	);

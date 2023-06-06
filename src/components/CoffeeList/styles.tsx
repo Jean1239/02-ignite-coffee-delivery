@@ -20,7 +20,10 @@ export const CoffeeListFilter = styled.div`
 	gap: 0.5rem;
 	align-items: center;
 
-	span {
+	button {
+		text-transform: uppercase;
+		cursor: pointer;
+
 		border: solid 1px ${(props) => props.theme.colors["brand-yellow"]};
 		color: ${(props) => props.theme.colors["brand-yellow"]};
 		font-size: ${(props) => props.theme.fonts.tag.size};
@@ -28,6 +31,22 @@ export const CoffeeListFilter = styled.div`
 		line-height: ${(props) => props.theme.fonts.tag.lineHeight};
 		border-radius: 100px;
 		padding: 0.375rem 0.75rem;
+
+		&:hover {
+			color: ${(props) => props.theme.colors["brand-yellow-dark"]};
+			background-color: ${(props) => props.theme.colors["brand-yellow"]};
+		}
+
+		&.selectedTag {
+			color: ${(props) => props.theme.colors["brand-yellow-dark"]};
+			background-color: ${(props) => props.theme.colors["brand-yellow"]};
+		}
+
+		&.selectedTag:hover {
+			color: ${(props) => props.theme.colors["brand-yellow-dark"]};
+			background-color: ${(props) =>
+				props.theme.colors["brand-yellow-light"]};
+		}
 	}
 `;
 
