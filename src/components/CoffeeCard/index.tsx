@@ -4,22 +4,33 @@ import {
 	CoffeeDescription,
 	CoffeeCardStyled,
 	CoffeeTagList,
+	CoffeeCardFooter,
 } from "./styles";
-import coffeeImage from "../../assets/coffees/coffee.svg";
 
-export function CoffeeCard() {
+export type CoffeeType = {
+	name: string;
+	description: string;
+	image_url: string;
+	tags: string[];
+	price: number;
+};
+
+interface CoffeeCardProps {
+	coffee: CoffeeType;
+}
+
+export function CoffeeCard({ coffee }: CoffeeCardProps) {
 	return (
 		<CoffeeCardStyled>
-			<CoffeeImage src={coffeeImage} alt="" />
+			<CoffeeImage src={coffee.image_url} alt="" />
 			<CoffeeTagList>
-				<span>ESPECIAL</span>
-				<span>ALCOÓLICO</span>
-				<span>GELADO</span>
+				{coffee.tags.map((tag) => (
+					<span key={tag}>{tag}</span>
+				))}
 			</CoffeeTagList>
-			<CoffeeName>Expresso Tradicional</CoffeeName>
-			<CoffeeDescription>
-				O tradicional café feito com água quente e grãos moídos
-			</CoffeeDescription>
+			<CoffeeName>{coffee.name}</CoffeeName>
+			<CoffeeDescription>{coffee.description}</CoffeeDescription>
+			<CoffeeCardFooter></CoffeeCardFooter>
 		</CoffeeCardStyled>
 	);
 }

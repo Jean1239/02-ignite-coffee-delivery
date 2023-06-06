@@ -29,6 +29,7 @@ export const CoffeeTagList = styled.div`
 
 		font-size: ${(props) => props.theme.fonts.tag.size};
 		font-weight: ${(props) => props.theme.fonts.tag.weight};
+		text-transform: uppercase;
 	}
 `;
 
@@ -46,3 +47,5 @@ export const CoffeeDescription = styled.span`
 	color: ${(props) => props.theme.colors["base-label"]};
 	text-align: center;
 `;
+
+export const CoffeeCardFooter = styled.footer``;
