@@ -61,7 +61,9 @@ export function Home() {
 					<img src={introImage} alt="" />
 				</IntroImageContainer>
 			</IntroContainer>
-			<CoffeeList />
+			<main>
+				<CoffeeList />
+			</main>
 		</>
 	);
 }

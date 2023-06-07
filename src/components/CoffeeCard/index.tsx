@@ -8,11 +8,11 @@ import {
 	CoffeeCardFooter,
 	AddToCartButton,
 	PriceContainer,
-	QuantityContainer,
 	QuantityAndCartButtonContainer,
 } from "./styles";
 import { BuyContext } from "../../contexts/BuyContext";
-import { Minus, Plus, ShoppingCart } from "@phosphor-icons/react";
+import { ShoppingCart } from "@phosphor-icons/react";
+import { QuantityCounter } from "../QuantityCounter";
 
 export type CoffeeType = {
 	name: string;
@@ -32,20 +32,19 @@ export function CoffeeCard({ coffee }: CoffeeCardProps) {
 
 	function handleAddToCartClick() {
 		addItemToShoppingCart({
-			name: coffee.name,
-			pricePerUnit: coffee.price,
+			coffee: coffee,
 			quantity: quantity,
 		});
 		setQuantity(1);
 	}
 
-	function handleMinusClick() {
+	function decrementQuantity() {
 		if (quantity > 1) {
 			setQuantity((state) => state - 1);
 		}
 	}
 
-	function handlePlusClick() {
+	function incrementQuantity() {
 		setQuantity((state) => state + 1);
 	}
 
@@ -69,23 +68,11 @@ export function CoffeeCard({ coffee }: CoffeeCardProps) {
 					R$ <strong>{priceFormatted}</strong>
 				</PriceContainer>
 				<QuantityAndCartButtonContainer>
-					<QuantityContainer>
-						<button>
-							<Minus
-								size={14}
-								weight="bold"
-								onClick={handleMinusClick}
-							/>
-						</button>
-						<span>{quantity}</span>
-						<button>
-							<Plus
-								size={14}
-								weight="bold"
-								onClick={handlePlusClick}
-							/>
-						</button>
-					</QuantityContainer>
+					<QuantityCounter
+						quantity={quantity}
+						incrementQuantity={incrementQuantity}
+						decrementQuantity={decrementQuantity}
+					/>
 					<AddToCartButton onClick={handleAddToCartClick}>
 						<ShoppingCart size={22} weight="fill" />
 					</AddToCartButton>

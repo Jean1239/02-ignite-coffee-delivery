@@ -32,6 +32,8 @@ export const CoffeeListFilter = styled.div`
 		border-radius: 100px;
 		padding: 0.375rem 0.75rem;
 
+		background-color: ${(props) => props.theme.colors["base-background"]};
+
 		&:hover {
 			color: ${(props) => props.theme.colors["brand-yellow-dark"]};
 			background-color: ${(props) => props.theme.colors["brand-yellow"]};

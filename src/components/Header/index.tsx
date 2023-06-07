@@ -10,6 +10,7 @@ import {
 } from "./styles";
 import { useContext } from "react";
 import { BuyContext } from "../../contexts/BuyContext";
+import { Link } from "react-router-dom";
 
 export function Header() {
 	const { shoppingCart } = useContext(BuyContext);
@@ -21,13 +22,14 @@ export function Header() {
 	return (
 		<HeaderContainer>
 			<NavContainer>
-				<img src={logo} alt="" />
+				<Link to={"/"}>
+					<img src={logo} alt="" />
+				</Link>
 				<LocationAndCartContainer>
 					<LocationContainer>
-						<MapPin size={22} weight="fill" color="#8047F8" /> Porto
-						Alegre, RS
+						<MapPin size={22} weight="fill" /> Porto Alegre, RS
 					</LocationContainer>
-					<ShoppingCartContainer>
+					<ShoppingCartContainer to={"/checkout"}>
 						{amount != 0 && (
 							<AmountContainer>{amount}</AmountContainer>
 						)}

@@ -1,18 +1,22 @@
 import { produce } from "immer";
 import { ActionTypes } from "./actions";
+import { CoffeeType } from "../../components/CoffeeCard";
 
-export interface ShoppingCartItem {
-	name: string;
+export interface ShoppingCartItemType {
+	coffee: CoffeeType;
 	quantity: number;
-	pricePerUnit: number;
 }
 
-export function ShoppingCartReducer(state: ShoppingCartItem[], action: any) {
+export function ShoppingCartReducer(
+	state: ShoppingCartItemType[],
+	action: any
+) {
 	switch (action.type) {
 		case ActionTypes.ADD_NEW_ITEM:
 			return produce(state, (draft) => {
 				const oldItem = draft.find(
-					(shoppingItem) => shoppingItem.name === action.payload.name
+					(shoppingItem) =>
+						shoppingItem.coffee.name === action.payload.coffee.name
 				);
 				if (oldItem) {
 					oldItem.quantity += action.payload.quantity;
