@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const ShoppingCartItemContainer = styled.div`
 	display: flex;
-	padding: 0.75rem 0.25rem;
+	padding: 0 0.25rem 1.5rem;
 	border-bottom: solid 1px ${(props) => props.theme.colors["base-button"]};
 	justify-content: space-between;
 
@@ -52,5 +52,13 @@ export const RemoveButton = styled.button`
 
 	svg {
 		color: ${(props) => props.theme.colors["brand-purple"]};
+	}
+
+	&:hover {
+		color: ${(props) => props.theme.colors["base-subtitle"]};
+
+		svg {
+			color: ${(props) => props.theme.colors["brand-purple-dark"]};
+		}
 	}
 `;

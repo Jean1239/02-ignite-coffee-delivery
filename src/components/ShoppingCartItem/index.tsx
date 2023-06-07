@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { ShoppingCartItemType } from "../../reducers/shoppingCart/reducer";
 import { QuantityCounter } from "../QuantityCounter";
 import {
@@ -10,20 +10,31 @@ import {
 	ShoppingCartItemContainer,
 } from "./styles";
 import { Trash } from "@phosphor-icons/react";
+import { BuyContext } from "../../contexts/BuyContext";
 
 interface ShoppingCartItemProps {
 	item: ShoppingCartItemType;
 }
 
 export function ShoppingCartItem({ item }: ShoppingCartItemProps) {
+	const { incrementQuantityOfItem, decrementQuantityOfItem, removeItem } =
+		useContext(BuyContext);
 	const [quantity, setQuantity] = useState(item.quantity);
 
 	function incrementQuantity() {
 		setQuantity((state) => state + 1);
+		incrementQuantityOfItem(item);
 	}
 
 	function decrementQuantity() {
-		if (quantity > 1) setQuantity((state) => state - 1);
+		if (quantity > 1) {
+			setQuantity((state) => state - 1);
+			decrementQuantityOfItem(item);
+		}
+	}
+
+	function handleRemoveClick() {
+		removeItem(item);
 	}
 
 	const totalPrice = item.coffee.price * item.quantity;
@@ -40,7 +51,7 @@ export function ShoppingCartItem({ item }: ShoppingCartItemProps) {
 							incrementQuantity={incrementQuantity}
 							decrementQuantity={decrementQuantity}
 						/>
-						<RemoveButton>
+						<RemoveButton onClick={handleRemoveClick}>
 							<Trash size={16} />
 							REMOVER
 						</RemoveButton>
