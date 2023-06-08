@@ -11,6 +11,10 @@ export const CheckoutGridContainer = styled.main`
 		font-size: ${(props) => props.theme.fonts.title.xs.size};
 		font-weight: ${(props) => props.theme.fonts.title.xs.weight};
 	}
+
+	@media (max-width: 645px) {
+		grid-template-columns: 1fr;
+	}
 `;
 
 const Card = styled.div`

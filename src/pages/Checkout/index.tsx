@@ -27,7 +27,7 @@ export function Checkout() {
 				<h2>Cafés Selecionados</h2>
 				<CheckoutCard>
 					{shoppingCart.map((item) => (
-						<ShoppingCartItem item={item} />
+						<ShoppingCartItem key={item.coffee.name} item={item} />
 					))}
 					<CheckoutPriceInfo>
 						<PriceContainer>

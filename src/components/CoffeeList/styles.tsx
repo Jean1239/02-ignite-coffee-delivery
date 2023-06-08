@@ -13,12 +13,19 @@ export const CoffeeListHeader = styled.header`
 		font-weight: ${(props) => props.theme.fonts.title.l.weight};
 		color: ${(props) => props.theme.colors["base-subtitle"]};
 	}
+
+	@media (max-width: 425px) {
+		flex-direction: column;
+		gap: 1rem;
+	}
 `;
 
 export const CoffeeListFilter = styled.div`
 	display: flex;
 	gap: 0.5rem;
 	align-items: center;
+	justify-content: center;
+	flex-wrap: wrap;
 
 	button {
 		text-transform: uppercase;
@@ -57,4 +64,12 @@ export const CoffeeListGrid = styled.main`
 	grid-template-columns: repeat(4, 1fr);
 	grid-column-gap: 2rem;
 	grid-row-gap: 2.5rem;
+
+	@media (min-width: 500px) and (max-width: 950px) {
+		grid-template-columns: repeat(2, 1fr);
+	}
+
+	@media (max-width: 499px) {
+		grid-template-columns: 1fr;
+	}
 `;

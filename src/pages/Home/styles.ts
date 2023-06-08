@@ -1,16 +1,28 @@
 import styled from "styled-components";
 
 export const IntroContainer = styled.div`
-	display: grid;
-	grid-template-columns: 588px 1fr;
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
+	@media (max-width: 70rem) {
+		flex-direction: column;
+	}
+	img {
+		max-width: 100%;
+	}
 `;
 
 export const IntroLeftColumn = styled.div`
 	display: flex;
 	flex-direction: column;
+	max-width: 588px;
 	padding: 5.875rem 0 6.75rem;
 	gap: 4.125rem;
 `;
+
+export const IntroImageContainer = styled.div``;
 
 export const IntroText = styled.div`
 	h1 {
@@ -30,6 +42,11 @@ export const IntroText = styled.div`
 export const IntroItens = styled.div`
 	display: grid;
 	grid-template-columns: 1fr 1fr;
+
+	@media (max-width: 700px) {
+		grid-template-columns: 1fr;
+		grid-row-gap: 1rem;
+	}
 `;
 
 export const IntroItemColumn = styled.div`
@@ -76,10 +93,4 @@ export const IntroItemIcon = styled.span<IntroItemIconProps>`
 	svg {
 		color: ${(props) => props.theme.colors["base-background"]};
 	}
-`;
-
-export const IntroImageContainer = styled.div`
-	display: flex;
-	align-items: center;
-	justify-content: flex-end;
 `;

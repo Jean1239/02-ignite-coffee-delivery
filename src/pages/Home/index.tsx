@@ -57,9 +57,7 @@ export function Home() {
 						</IntroItemColumn>
 					</IntroItens>
 				</IntroLeftColumn>
-				<IntroImageContainer>
-					<img src={introImage} alt="" />
-				</IntroImageContainer>
+				<img src={introImage} alt="" />
 			</IntroContainer>
 			<main>
 				<CoffeeList />
