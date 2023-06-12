@@ -23,6 +23,41 @@ const Card = styled.div`
 	padding: 2.5rem;
 `;
 
+export const AdressCard = styled(Card)`
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+	border-radius: 6px;
+`;
+
+export const AdressCardHeader = styled.div`
+	display: flex;
+	gap: 0.5rem;
+
+	span {
+		font-size: ${(props) => props.theme.fonts.text.m.size};
+		line-height: ${(props) => props.theme.fonts.text.m.lineHeight};
+		color: ${(props) => props.theme.colors["base-subtitle"]};
+	}
+
+	p {
+		font-size: ${(props) => props.theme.fonts.text.s.size};
+		line-height: ${(props) => props.theme.fonts.text.s.lineHeight};
+		color: ${(props) => props.theme.colors["base-text"]};
+	}
+
+	svg {
+		color: ${(props) => props.theme.colors["brand-yellow-dark"]};
+	}
+`;
+
+export const AdressForm = styled.form`
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+`;
+export const PaymentCard = styled(Card)``;
+
 export const CheckoutCard = styled(Card)`
 	display: flex;
 	margin-left: auto;

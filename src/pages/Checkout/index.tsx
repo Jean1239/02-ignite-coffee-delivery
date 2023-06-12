@@ -1,14 +1,21 @@
 import { useContext } from "react";
 import {
+	AdressCard,
+	AdressCardHeader,
+	AdressForm,
 	BuyButton,
 	CheckoutCard,
 	CheckoutGridContainer,
 	CheckoutPriceInfo,
+	PaymentCard,
 	PriceContainer,
 	TotalPriceContainer,
 } from "./styles";
 import { BuyContext } from "../../contexts/BuyContext";
 import { ShoppingCartItem } from "../../components/ShoppingCartItem";
+import { MapPinLine } from "@phosphor-icons/react";
+import { Input } from "../../components/Input";
+import { FormGroup } from "../../components/Input/styles";
 
 export function Checkout() {
 	const { shoppingCart } = useContext(BuyContext);
@@ -22,6 +29,39 @@ export function Checkout() {
 		<CheckoutGridContainer>
 			<div>
 				<h2>Complete seu pedido</h2>
+				<AdressCard>
+					<AdressCardHeader>
+						<MapPinLine size={22} />
+						<div>
+							<span>Endereço de Entrega</span>
+							<p>
+								Informe o endereço onde deseja receber o pedido
+							</p>
+						</div>
+					</AdressCardHeader>
+					<AdressForm>
+						<Input type="text" placeholder="CEP" variant="md" />
+						<Input type="text" placeholder="Rua" />
+						<FormGroup>
+							<Input
+								type="number"
+								placeholder="Número"
+								variant="md"
+							/>
+							<Input type="text" placeholder="Complemento" />
+						</FormGroup>
+						<FormGroup>
+							<Input
+								type="text"
+								placeholder="Bairro"
+								variant="md"
+							/>
+							<Input type="text" placeholder="Cidade" />
+							<Input type="text" placeholder="UF" variant="sm" />
+						</FormGroup>
+					</AdressForm>
+				</AdressCard>
+				<PaymentCard></PaymentCard>
 			</div>
 			<div>
 				<h2>Cafés Selecionados</h2>
