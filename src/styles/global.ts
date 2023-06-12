@@ -14,7 +14,7 @@ export const GlobalStyle = createGlobalStyle`
 			props.theme.colors["brand-purple-light"]};
     }
 
-    body {
+    body, input, button, textarea {
         background-color: ${(props) => props.theme.colors["base-background"]};
         font-size: 1rem;
         font-family: Roboto, sans-serif;

@@ -62,8 +62,8 @@ export const defaultTheme = {
 				lineHeight: "1.3",
 			},
 			xs: {
-				size: "1.125rem",
-				weight: "700",
+				size: "0.75rem",
+				weight: "400",
 				lineHeight: "1.3",
 			},
 		},

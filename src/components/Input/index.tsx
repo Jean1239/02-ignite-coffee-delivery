@@ -1,17 +1,10 @@
+import { InputHTMLAttributes } from "react";
 import { StyledInput } from "./styles";
 
-interface InputProps {
+interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 	variant?: "sm" | "md" | "lg";
-	type: "text" | "number";
-	placeholder?: string;
 }
 
-export function Input({
-	variant = "lg",
-	type = "text",
-	placeholder,
-}: InputProps) {
-	return (
-		<StyledInput variant={variant} type={type} placeholder={placeholder} />
-	);
+export function Input({ variant = "lg", ...props }: InputProps) {
+	return <StyledInput variant={variant} {...props} />;
 }

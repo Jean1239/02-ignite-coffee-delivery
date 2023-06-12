@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import {
 	AdressCard,
 	AdressCardHeader,
@@ -7,15 +7,25 @@ import {
 	CheckoutCard,
 	CheckoutGridContainer,
 	CheckoutPriceInfo,
+	PaymentButtonsContainer,
 	PaymentCard,
+	PaymentCardHeader,
 	PriceContainer,
 	TotalPriceContainer,
 } from "./styles";
 import { BuyContext } from "../../contexts/BuyContext";
 import { ShoppingCartItem } from "../../components/ShoppingCartItem";
-import { MapPinLine } from "@phosphor-icons/react";
+import {
+	Bank,
+	CreditCard,
+	CurrencyDollar,
+	MapPinLine,
+	Money,
+} from "@phosphor-icons/react";
 import { Input } from "../../components/Input";
 import { FormGroup } from "../../components/Input/styles";
+
+type PaymentMethod = "creditCard" | "debitCard" | "cash" | null;
 
 export function Checkout() {
 	const { shoppingCart } = useContext(BuyContext);
@@ -24,6 +34,12 @@ export function Checkout() {
 	}, 0);
 	const deliveryPrice = 3.5;
 	const totalPrice = totalItensPrice + deliveryPrice;
+
+	const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>(null);
+
+	function handleSelectPaymentMethod(method: PaymentMethod) {
+		setPaymentMethod(method);
+	}
 
 	return (
 		<CheckoutGridContainer>
@@ -47,6 +63,7 @@ export function Checkout() {
 								type="number"
 								placeholder="Número"
 								variant="md"
+								min={1}
 							/>
 							<Input type="text" placeholder="Complemento" />
 						</FormGroup>
@@ -61,7 +78,51 @@ export function Checkout() {
 						</FormGroup>
 					</AdressForm>
 				</AdressCard>
-				<PaymentCard></PaymentCard>
+				<PaymentCard>
+					<PaymentCardHeader>
+						<CurrencyDollar size={22} />
+						<div>
+							<span>Pagamento</span>
+							<p>
+								O pagamento é feito na entrega. Escolha a forma
+								que deseja pagar
+							</p>
+						</div>
+					</PaymentCardHeader>
+					<PaymentButtonsContainer>
+						<button
+							className={
+								paymentMethod === "creditCard" ? "selected" : ""
+							}
+							onClick={() =>
+								handleSelectPaymentMethod("creditCard")
+							}
+						>
+							<CreditCard size={16} />
+							CARTÃO DE CRÉDITO
+						</button>
+						<button
+							className={
+								paymentMethod === "debitCard" ? "selected" : ""
+							}
+							onClick={() =>
+								handleSelectPaymentMethod("debitCard")
+							}
+						>
+							<Bank size={16} />
+							CARTÃO DE DÉBITO
+						</button>
+						<button
+							className={
+								paymentMethod === "cash" ? "selected" : ""
+							}
+							onClick={() => handleSelectPaymentMethod("cash")}
+						>
+							<Money size={16} />
+							DINHEIRO
+						</button>
+					</PaymentButtonsContainer>
+				</PaymentCard>
 			</div>
 			<div>
 				<h2>Cafés Selecionados</h2>
