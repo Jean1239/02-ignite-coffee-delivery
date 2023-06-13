@@ -16,7 +16,7 @@ import {
 	PriceContainer,
 	TotalPriceContainer,
 } from "./styles";
-import { BuyContext, PaymentMethod } from "../../contexts/BuyContext";
+import { BuyContext } from "../../contexts/BuyContext";
 import { ShoppingCartItem } from "../../components/ShoppingCartItem";
 import {
 	Bank,
