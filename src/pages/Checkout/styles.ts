@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import * as RadioGroup from "@radix-ui/react-radio-group";
 
 export const CheckoutGridContainer = styled.main`
 	display: grid;
@@ -52,11 +53,39 @@ export const AdressCardHeader = styled.div`
 	}
 `;
 
-export const AdressForm = styled.form`
+export const AdressForm = styled.div`
 	display: flex;
 	flex-direction: column;
 	gap: 2rem;
 `;
+
+interface InputProps {
+	variant: "sm" | "md" | "lg";
+}
+
+export const Input = styled.input<InputProps>`
+	width: 100%;
+	border: 1px solid ${(props) => props.theme.colors["base-button"]};
+	border-radius: 4px;
+	background-color: ${(props) => props.theme.colors["base-input"]};
+	padding: 0.75rem;
+	max-width: ${(props) => {
+		switch (props.variant) {
+			case "sm":
+				return "60px";
+			case "md":
+				return "200px";
+			case "lg":
+				return "none";
+		}
+	}};
+`;
+
+export const FormGroup = styled.div`
+	display: flex;
+	gap: 0.75rem;
+`;
+
 export const PaymentCard = styled(Card)`
 	display: flex;
 	flex-direction: column;
@@ -85,41 +114,41 @@ export const PaymentCardHeader = styled.div`
 	}
 `;
 
-export const PaymentButtonsContainer = styled.button`
+export const PaymentButtonsContainer = styled(RadioGroup.Root)`
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
 	grid-column-gap: 0.75rem;
 	border: 0;
 	background-color: inherit;
+`;
 
-	button {
-		display: flex;
-		gap: 0.75rem;
-		align-items: center;
-		border: 1px solid transparent;
+export const PaymentButtonItem = styled(RadioGroup.Item)`
+	display: flex;
+	gap: 0.75rem;
+	align-items: center;
+	border: 1px solid transparent;
 
-		font-size: ${(props) => props.theme.fonts.text.xs.size};
-		color: ${(props) => props.theme.colors["base-text"]};
-		background-color: ${(props) => props.theme.colors["base-button"]};
-		border-radius: 6px;
-		padding: 1rem;
+	font-size: ${(props) => props.theme.fonts.text.xs.size};
+	color: ${(props) => props.theme.colors["base-text"]};
+	background-color: ${(props) => props.theme.colors["base-button"]};
+	border-radius: 6px;
+	padding: 1rem;
 
-		cursor: pointer;
+	cursor: pointer;
 
-		&:hover {
-			background-color: ${(props) => props.theme.colors["base-hover"]};
-			color: ${(props) => props.theme.colors["base-subtitle"]};
-		}
+	svg {
+		color: ${(props) => props.theme.colors["brand-purple"]};
+	}
 
-		svg {
-			color: ${(props) => props.theme.colors["brand-purple"]};
-		}
+	&[data-state="unchecked"]:hover {
+		background-color: ${(props) => props.theme.colors["base-hover"]};
+		color: ${(props) => props.theme.colors["base-subtitle"]};
+	}
 
-		&.selected {
-			border-color: ${(props) => props.theme.colors["brand-purple"]};
-			background-color: ${(props) =>
-				props.theme.colors["brand-purple-light"]};
-		}
+	&[data-state="checked"] {
+		border-color: ${(props) => props.theme.colors["brand-purple"]};
+		background-color: ${(props) =>
+			props.theme.colors["brand-purple-light"]};
 	}
 `;
 

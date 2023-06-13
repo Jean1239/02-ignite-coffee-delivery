@@ -15,6 +15,8 @@ interface LocationType {
 	state: string;
 }
 
+export type PaymentMethod = "creditCard" | "debitCard" | "cash";
+
 interface BuyContextType {
 	shoppingCart: ShoppingCartItemType[];
 	location: LocationType | null;
