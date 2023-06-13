@@ -1,5 +1,5 @@
 import { produce } from "immer";
-import { ActionType, ActionTypes } from "./actions";
+import { ActionTypes } from "./actions";
 import { CoffeeType } from "../../components/CoffeeCard";
 
 export interface ShoppingCartItemType {
@@ -9,7 +9,7 @@ export interface ShoppingCartItemType {
 
 export function ShoppingCartReducer(
 	state: ShoppingCartItemType[],
-	action: ActionType
+	action: any
 ) {
 	switch (action.type) {
 		case ActionTypes.ADD_NEW_ITEM:
@@ -24,6 +24,7 @@ export function ShoppingCartReducer(
 				}
 				return [...draft, action.payload];
 			});
+
 		case ActionTypes.INCREMENT_QUANTITY_OF_ITEM:
 			return produce(state, (draft) => {
 				const item = draft.find(
@@ -35,6 +36,7 @@ export function ShoppingCartReducer(
 				}
 				return draft;
 			});
+
 		case ActionTypes.DECREMENT_QUANTITY_OF_ITEM:
 			return produce(state, (draft) => {
 				const item = draft.find(
@@ -46,12 +48,17 @@ export function ShoppingCartReducer(
 				}
 				return draft;
 			});
+
 		case ActionTypes.REMOVE_ITEM:
 			return produce(state, (draft) => {
 				return draft.filter(
 					(elem) => elem.coffee.name !== action.payload.coffee.name
 				);
 			});
+
+		case ActionTypes.CLEAR_SHOPPING_CART:
+			return [];
+
 		default:
 			return state;
 	}

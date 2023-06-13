@@ -16,7 +16,7 @@ import {
 	PriceContainer,
 	TotalPriceContainer,
 } from "./styles";
-import { BuyContext } from "../../contexts/BuyContext";
+import { BuyContext, LocationType } from "../../contexts/BuyContext";
 import { ShoppingCartItem } from "../../components/ShoppingCartItem";
 import {
 	Bank,
@@ -41,7 +41,8 @@ const CheckoutFormSchema = z.object({
 type CheckoutFormInputs = z.infer<typeof CheckoutFormSchema>;
 
 export function Checkout() {
-	const { shoppingCart } = useContext(BuyContext);
+	const { shoppingCart, setLocation, setPaymentMethod, clearShoppingCart } =
+		useContext(BuyContext);
 	const { control, register, handleSubmit } = useForm<CheckoutFormInputs>({
 		resolver: zodResolver(CheckoutFormSchema),
 	});
@@ -53,7 +54,17 @@ export function Checkout() {
 	const totalPrice = totalItensPrice + deliveryPrice;
 
 	function finishCheckout(values: CheckoutFormInputs) {
-		console.log(values);
+		const location: LocationType = {
+			city: values.addressCity,
+			district: values.addressState,
+			number: values.addressNumber,
+			state: values.addressState,
+			street: values.addressStreet,
+		};
+
+		setLocation(location);
+		setPaymentMethod(values.paymentMethod);
+		clearShoppingCart();
 	}
 
 	return (

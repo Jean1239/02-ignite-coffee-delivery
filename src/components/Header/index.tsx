@@ -14,6 +14,7 @@ import { Link } from "react-router-dom";
 
 export function Header() {
 	const { shoppingCart } = useContext(BuyContext);
+	const { location } = useContext(BuyContext);
 	const amount = shoppingCart.reduce(
 		(acc, item) => (acc += item.quantity),
 		0
@@ -26,9 +27,12 @@ export function Header() {
 					<img src={logo} alt="" />
 				</Link>
 				<LocationAndCartContainer>
-					<LocationContainer>
-						<MapPin size={22} weight="fill" /> Porto Alegre, RS
-					</LocationContainer>
+					{location && (
+						<LocationContainer>
+							<MapPin size={22} weight="fill" />{" "}
+							{`${location.city}, ${location.state}`}
+						</LocationContainer>
+					)}
 					<ShoppingCartContainer to={"/checkout"}>
 						{amount != 0 && (
 							<AmountContainer>{amount}</AmountContainer>

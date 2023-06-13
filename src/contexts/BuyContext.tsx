@@ -5,26 +5,33 @@ import {
 } from "../reducers/shoppingCart/reducer";
 import {
 	addNewItemAction,
+	clearShoppingCartAction,
 	decrementQuantityOfItemAction,
 	incrementQuantityOfItemAction,
 	removeItemAction,
 } from "../reducers/shoppingCart/actions";
 
-interface LocationType {
+export interface LocationType {
+	street: string;
+	number: number;
+	district: string;
 	city: string;
 	state: string;
 }
 
-export type PaymentMethod = "creditCard" | "debitCard" | "cash";
+type PaymentMethodType = "creditCard" | "debitCard" | "cash";
 
 interface BuyContextType {
 	shoppingCart: ShoppingCartItemType[];
 	location: LocationType | null;
+	paymentMethod: PaymentMethodType | null;
 	addItemToShoppingCart: (item: ShoppingCartItemType) => void;
 	incrementQuantityOfItem: (item: ShoppingCartItemType) => void;
 	decrementQuantityOfItem: (item: ShoppingCartItemType) => void;
 	removeItem: (item: ShoppingCartItemType) => void;
-	setDeliveryAdress: (location: LocationType) => void;
+	setLocation: (location: LocationType) => void;
+	setPaymentMethod: (paymentMethod: PaymentMethodType) => void;
+	clearShoppingCart: () => void;
 }
 
 export const BuyContext = createContext({} as BuyContextType);
@@ -36,6 +43,8 @@ interface BuyContextProviderProps {
 export function BuyContextProvider({ children }: BuyContextProviderProps) {
 	const [shoppingCart, dispatch] = useReducer(ShoppingCartReducer, []);
 	const [location, setLocation] = useState<LocationType | null>(null);
+	const [paymentMethod, setPaymentMethod] =
+		useState<PaymentMethodType | null>(null);
 
 	function addItemToShoppingCart(item: ShoppingCartItemType) {
 		dispatch(addNewItemAction(item));
@@ -53,8 +62,8 @@ export function BuyContextProvider({ children }: BuyContextProviderProps) {
 		dispatch(removeItemAction(item));
 	}
 
-	function setDeliveryAdress(location: LocationType) {
-		setLocation(location);
+	function clearShoppingCart() {
+		dispatch(clearShoppingCartAction());
 	}
 
 	return (
@@ -62,11 +71,14 @@ export function BuyContextProvider({ children }: BuyContextProviderProps) {
 			value={{
 				shoppingCart,
 				location,
+				paymentMethod,
 				addItemToShoppingCart,
 				incrementQuantityOfItem,
 				decrementQuantityOfItem,
+				clearShoppingCart,
 				removeItem,
-				setDeliveryAdress,
+				setLocation,
+				setPaymentMethod,
 			}}
 		>
 			{children}
