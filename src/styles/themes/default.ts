@@ -50,15 +50,17 @@ export const defaultTheme = {
 			family: "'Roboto', sans-serif;",
 			l: {
 				size: "1.25rem",
+				weight: "400",
 				lineHeight: "1.3",
 			},
 			m: {
 				size: "1rem",
+				weight: "400",
 				lineHeight: "1.3",
 			},
 			s: {
 				size: "0.875rem",
-				weight: "Regular",
+				weight: "400",
 				lineHeight: "1.3",
 			},
 			xs: {
@@ -83,7 +85,7 @@ export const defaultTheme = {
 			m: {
 				family: "Roboto",
 				size: "0.75rem",
-				weight: "Regular",
+				weight: "400",
 				lineHeight: "160%",
 			},
 		},

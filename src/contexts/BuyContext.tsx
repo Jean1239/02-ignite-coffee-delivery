@@ -12,8 +12,10 @@ import {
 } from "../reducers/shoppingCart/actions";
 
 export interface LocationType {
+	cep: string;
 	street: string;
 	number: number;
+	complement?: string;
 	district: string;
 	city: string;
 	state: string;

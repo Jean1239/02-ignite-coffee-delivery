@@ -28,10 +28,13 @@ import {
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
+import { useNavigate } from "react-router-dom";
 
 const CheckoutFormSchema = z.object({
+	addressCEP: z.string(),
 	addressStreet: z.string(),
 	addressNumber: z.number(),
+	addressComplement: z.string().nullable(),
 	addressDistrict: z.string(),
 	addressCity: z.string(),
 	addressState: z.string(),
@@ -41,11 +44,29 @@ const CheckoutFormSchema = z.object({
 type CheckoutFormInputs = z.infer<typeof CheckoutFormSchema>;
 
 export function Checkout() {
-	const { shoppingCart, setLocation, setPaymentMethod, clearShoppingCart } =
-		useContext(BuyContext);
+	const {
+		shoppingCart,
+		location,
+		paymentMethod,
+		setLocation,
+		setPaymentMethod,
+		clearShoppingCart,
+	} = useContext(BuyContext);
+
 	const { control, register, handleSubmit } = useForm<CheckoutFormInputs>({
 		resolver: zodResolver(CheckoutFormSchema),
+		defaultValues: {
+			addressCEP: location?.cep,
+			addressCity: location?.city,
+			addressDistrict: location?.district,
+			addressNumber: location?.number,
+			addressComplement: location?.complement,
+			addressState: location?.state,
+			addressStreet: location?.street,
+			paymentMethod: paymentMethod ? paymentMethod : undefined,
+		},
 	});
+	const navigate = useNavigate();
 
 	const totalItensPrice = shoppingCart.reduce((acc, elem) => {
 		return acc + elem.coffee.price * elem.quantity;
@@ -54,10 +75,18 @@ export function Checkout() {
 	const totalPrice = totalItensPrice + deliveryPrice;
 
 	function finishCheckout(values: CheckoutFormInputs) {
+		if (shoppingCart.length < 1) {
+			return;
+		}
+
 		const location: LocationType = {
+			cep: values.addressCEP,
 			city: values.addressCity,
-			district: values.addressState,
+			district: values.addressDistrict,
 			number: values.addressNumber,
+			complement: values.addressComplement
+				? values.addressComplement
+				: undefined,
 			state: values.addressState,
 			street: values.addressStreet,
 		};
@@ -65,6 +94,7 @@ export function Checkout() {
 		setLocation(location);
 		setPaymentMethod(values.paymentMethod);
 		clearShoppingCart();
+		navigate("/success");
 	}
 
 	return (
@@ -84,7 +114,13 @@ export function Checkout() {
 							</div>
 						</AdressCardHeader>
 						<AdressForm>
-							<Input type="text" placeholder="CEP" variant="md" />
+							<Input
+								type="text"
+								placeholder="CEP"
+								variant="md"
+								required
+								{...register("addressCEP")}
+							/>
 							<Input
 								type="text"
 								placeholder="Rua"
@@ -107,6 +143,7 @@ export function Checkout() {
 									type="text"
 									placeholder="Complemento"
 									variant="lg"
+									{...register("addressComplement")}
 								/>
 							</FormGroup>
 							<FormGroup>
@@ -153,6 +190,12 @@ export function Checkout() {
 								return (
 									<PaymentButtonsContainer
 										onValueChange={field.onChange}
+										required
+										defaultValue={
+											paymentMethod
+												? paymentMethod
+												: undefined
+										}
 									>
 										<PaymentButtonItem value="creditCard">
 											<CreditCard size={16} />
